@@ -4,6 +4,7 @@
   "description": "Mettere a disposizione i corsi didattici dell’Università Aldo Moro, tramite video lezioni online, integrando algoritmi AI per la generazione di domande, mappe concettuali, e note.",
   "main": "index.js",
   "scripts": {
+    "start": "node --trace-warnings --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michele Dellaquila",
