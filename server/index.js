@@ -5,21 +5,34 @@ const connectToMongoDB = require("./configs/mongodb");
 const errorHandler = require("./middlewares/error");
 
 // Load environment variables from .env.local file
-dotenv.config({ path: `.env.local`, override: true });
+const loadEnvironmentVariables = () => {
+  const result = dotenv.config({ path: `.env.local`, override: true });
+  if (result.error) throw result.error;
+};
 
-connectToMongoDB().then(() => {
-    console.log("Connected to MongoDB successfully");
-    const app = express();
+const configureMiddlewares = (app) => {
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(errorHandler);
+};
 
-    // middlewares
-    app.use(cors());
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
-    app.use(errorHandler);
+const createExpressApp = () => {
+  const app = express();
+  configureMiddlewares(app);
+  const port = process.env.SERVER_PORT || 5000;
+  app.listen(port, () => console.log(`Server is running on port ${port}`));
+};
 
-}).catch((error) => {
-    console.error("Failed to connect to MongoDB:", error);
+const startApplication = async () => {
+  try {
+    loadEnvironmentVariables();
+    await connectToMongoDB();
+    createExpressApp();
+  } catch (error) {
+    console.error("Error starting application:", error.message);
     process.exit(1);
-})
+  }
+};
 
-
+startApplication();
