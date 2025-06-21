@@ -1,0 +1,11 @@
+{
+  "name": "e-learning",
+  "version": "1.0.0",
+  "description": "Mettere a disposizione i corsi didattici dell’Università Aldo Moro, tramite video lezioni online, integrando algoritmi AI per la generazione di domande, mappe concettuali, e note.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michele Dellaquila",
+  "license": "ISC"
+}
