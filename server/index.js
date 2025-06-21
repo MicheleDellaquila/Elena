@@ -1,8 +1,9 @@
+require("module-alias/register");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const express = require("express");
-const connectToMongoDB = require("./configs/mongodb");
-const errorHandler = require("./middlewares/error");
+const connectToMongoDB = require("@configs/mongodb");
+const errorHandler = require("@middlewares/error");
 
 // Load environment variables from .env.local file
 const loadEnvironmentVariables = () => {
