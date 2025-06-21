@@ -1,4 +1,5 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { ServerApiVersion } = require("mongodb");
+const mongoose = require("mongoose");
 
 const getMongoURI = () => {
   const dbUsername = process.env.DB_USER || undefined;
@@ -7,22 +8,12 @@ const getMongoURI = () => {
   return mongoURI;
 };
 
-const createMongoClient = (mongoURI) => {
-  return new MongoClient(mongoURI, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
-};
-
 const connectToMongoDB = async () => {
   const mongoURI = getMongoURI();
-  const client = createMongoClient(mongoURI);
 
   try {
-    await client.connect();
+    const options = { serverApi: { version: ServerApiVersion.v1, strict: true, deprecationErrors: true } };
+    mongoose.connect(mongoURI, options);
     console.log("Connected to MongoDB successfully");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error.message);
