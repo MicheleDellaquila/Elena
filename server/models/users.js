@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 const usersSchema = new Schema({
   fullName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String },
   profileImage: String,
   role: { type: String, enum: ["student", "teacher"], default: "student" },
   createdAt: { type: Date, default: Date.now },

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const getMongoURI = () => {
   const dbUsername = process.env.DB_USER || undefined;
   const dbPassword = process.env.DB_PASSWORD || undefined;
-  const mongoURI = `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.jk3vrqy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+  const mongoURI = `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.jk3vrqy.mongodb.net/elearning?retryWrites=true&w=majority&appName=Cluster0`;
   return mongoURI;
 };
 
