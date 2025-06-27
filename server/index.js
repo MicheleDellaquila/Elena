@@ -4,8 +4,8 @@ const cors = require("cors");
 const express = require("express");
 const connectToMongoDB = require("@configs/mongodb");
 const errorHandler = require("@middlewares/error");
+const routes = require("@routes/routes");
 
-// Load environment variables from .env.local file
 const loadEnvironmentVariables = () => {
   const result = dotenv.config({ path: `.env.local`, override: true });
   if (result.error) throw result.error;
@@ -15,12 +15,16 @@ const configureMiddlewares = (app) => {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(errorHandler);
 };
 
 const createExpressApp = () => {
   const app = express();
   configureMiddlewares(app);
+
+  // This will register all the routes defined in the routes directory
+  app.use("/api/v1", routes);
+  app.use(errorHandler);
+
   const port = process.env.SERVER_PORT || 5000;
   app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
