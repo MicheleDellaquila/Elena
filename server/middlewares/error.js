@@ -1,4 +1,4 @@
-const errorHandler = (err, req, res) => {
+const errorHandler = (err, req, res, next) => {
   const errorResponse = {
     errorCode: err.code || 500,
     errorMessage: err.message || "An unexpected error occurred",
