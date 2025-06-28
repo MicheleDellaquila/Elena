@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const express = require("express");
 const connectToMongoDB = require("@configs/mongodb");
-const errorHandler = require("@middlewares/error");
+const { errorHandler } = require("@middlewares/error");
 const routes = require("@routes/routes");
 
 const loadEnvironmentVariables = () => {

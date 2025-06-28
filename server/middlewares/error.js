@@ -1,3 +1,11 @@
+class AppError extends Error {
+  constructor(message, code) {
+    super(message);
+
+    this.code = code || 500;
+  }
+}
+
 const errorHandler = (err, req, res, next) => {
   const errorResponse = {
     errorCode: err.code || 500,
@@ -13,4 +21,4 @@ const errorHandler = (err, req, res, next) => {
   return res.status(err.status || errorResponse.errorCode).json({ error: errorResponse.errorMessage });
 };
 
-module.exports = errorHandler;
+module.exports = { errorHandler, AppError };
