@@ -8,4 +8,9 @@ const signUpSchema = Joi.object({
   role: Joi.string().valid("student", "teacher").default("student"),
 });
 
-module.exports = { signUpSchema };
+const loginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).required(),
+});
+
+module.exports = { signUpSchema, loginSchema };
