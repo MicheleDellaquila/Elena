@@ -1,16 +1,13 @@
 const { signUpSchema } = require("@schemas/authSchemas");
 
-const schemas = {
-  "/register": signUpSchema,
-};
+const routeValidationSchemas = { "/register": signUpSchema };
 
 const dataValidation = async (req, _, next) => {
-  const body = req.body;
-  const schema = schemas[req.path];
+  const schema = routeValidationSchemas[req.path];
   if (!schema) throw new Error(`No validation schema found for path: ${req.path}`);
 
   try {
-    const isValidate = await schema.validateAsync(body);
+    const isValidate = await schema.validateAsync(req.body);
     if (!isValidate || typeof isValidate !== 'object') throw new Error("Validation failed")
     else next();
   } catch (error) {
