@@ -1,6 +1,6 @@
 const usersModel = require("@models/users");
 const { hashPassword } = require("@lib/password");
-const { generateToken } = require("@lib/jwt");
+const { setAuthCookies } = require("@helpers/setAuthCookies");
 
 const isEmailTaken = async (email) => {
   const user = await usersModel.findOne({ email });
@@ -27,22 +27,12 @@ const signUp = async (req, res, next) => {
     const newUser = { ...req.body, password: hashedPassword, profileImage: "" };
     const user = await saveUser(newUser);
 
-    const accessToken = generateToken({ _id: user._id }, process.env.ACCESS_TOKEN, "1h");
-    const refreshToken = generateToken({ _id: user._id }, process.env.REFRESH_TOKEN, "1d");
-    res.cookie("accessToken", accessToken, { httpOnly: true, secure: true, sameSite: "Strict", maxAge: 3600 * 1000 });
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-      maxAge: 86400 * 1000,
-    });
-
+    setAuthCookies(res, user._id);
     res.status(201).json({ message: "Registrazione avvenuta con successo", user: user });
   } catch (error) {
     if (error.message === "L'indirizzo email è già in uso.") return res.status(409).json({ message: error.message });
     else if (error.message === "Abbiamo riscontrato un errore") return res.status(500).json({ message: error.message });
-
-    next(error);
+    else return next(error);
   }
 };
 

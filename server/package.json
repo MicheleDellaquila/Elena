@@ -27,6 +27,7 @@
     "@controllers": "./controllers",
     "@configs": "./configs",
     "@schemas": "./schemas",
-    "@lib": "./lib"
+    "@lib": "./lib",
+    "@helpers": "./helpers"
   }
 }
