@@ -1,6 +1,6 @@
 const usersModel = require("@models/users");
 const { hashPassword } = require("@lib/password");
-const { setAuthCookies } = require("@helpers/setAuthCookies");
+const setAuthCookies = require("@helpers/setAuthCookies");
 const { AppError } = require("@middlewares/error");
 
 const isEmailTaken = async (email) => {
