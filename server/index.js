@@ -2,6 +2,7 @@ require("module-alias/register");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const connectToMongoDB = require("@configs/mongodb");
 const { errorHandler } = require("@middlewares/error");
 const routes = require("@routes/routes");
@@ -15,6 +16,7 @@ const configureMiddlewares = (app) => {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(cookieParser());
 };
 
 const createExpressApp = () => {
