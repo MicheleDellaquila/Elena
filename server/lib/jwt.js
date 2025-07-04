@@ -5,7 +5,7 @@ const generateToken = (data, secret, expiresIn) => jwt.sign(data, secret, { expi
 const decodeToken = (token, secret) => {
   try {
     return jwt.verify(token, secret, (err, decoded) => {
-      if (err) throw new AppError("Refresh token non valido o scaduto", 401);
+      if (err) throw new AppError("Token non valido o scaduto", 401);
       return decoded;
     });
   } catch (error) {

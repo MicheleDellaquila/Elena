@@ -11,7 +11,7 @@ const isEmailTaken = async (email) => {
 const saveUser = async (userData) => {
   const user = new usersModel(userData);
   const userSaved = await user.save();
-  if (!userSaved) throw new Error("Abbiamo riscontrato un errore");
+  if (!userSaved) throw new AppError("Abbiamo riscontrato un errore");
 
   return { ...userSaved._doc, password: undefined };
 };
