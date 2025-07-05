@@ -18,7 +18,7 @@ const errorHandler = (err, req, res, next) => {
     timestamp: new Date().toISOString(),
   };
 
-  return res.status(err.status || errorResponse.errorCode).json({ error: errorResponse.errorMessage });
+  return res.status(errorResponse.errorCode).json({ error: errorResponse.errorMessage });
 };
 
 module.exports = { errorHandler, AppError };
