@@ -1,12 +1,10 @@
 const usersModel = require("@models/users");
+const findUserByEmail = require("@helpers/findUserByEmail");
 const { hashPassword } = require("@lib/password");
 const setAuthCookies = require("@helpers/setAuthCookies");
 const { AppError } = require("@middlewares/error");
 
-const isEmailTaken = async (email) => {
-  const user = await usersModel.findOne({ email });
-  return !!user;
-};
+const isEmailTaken = async (email) => Boolean(await findUserByEmail(email));
 
 const saveUser = async (userData) => {
   const user = new usersModel(userData);
@@ -31,9 +29,7 @@ const signUp = async (req, res, next) => {
     setAuthCookies(res, user._id);
     res.status(201).json({ message: "Registrazione avvenuta con successo", user: user });
   } catch (error) {
-    if (error.code === 409) return res.status(error.code).json({ message: error.message });
-    else if (error.code === 500) return res.status(error.code).json({ message: error.message });
-    else return next(error);
+    next(error);
   }
 };
 

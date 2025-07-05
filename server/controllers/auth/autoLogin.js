@@ -12,7 +12,6 @@ const autoLogin = async (req, res, next) => {
 
     res.status(200).json({ message: "Accesso automatico riuscito.", user: user });
   } catch (error) {
-    if (error.name === "TokenExpiredError") return res.status(401).json({ error: "Utente non autorizzato" });
     next(error);
   }
 };

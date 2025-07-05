@@ -18,8 +18,7 @@ const refreshAccessToken = async (req, res, next) => {
     res.cookie("accessToken", newAccessToken, COMPUTED_COOKIE_OPTIONS);
     res.status(200).json({ message: "Access token aggiornato con successo" });
   } catch (error) {
-    if (error.code === 401) return res.status(error.code).json({ message: error.message });
-    else return next(error);
+    next(error);
   }
 };
 
