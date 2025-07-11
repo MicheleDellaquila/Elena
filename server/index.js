@@ -8,7 +8,7 @@ const { errorHandler } = require("@middlewares/error");
 const routes = require("@routes/routes");
 
 const loadEnvironmentVariables = () => {
-  const result = dotenv.config({ path: `.env.local`, override: true });
+  const result = dotenv.config({ path: '.env.local', override: true });
   if (result.error) throw result.error;
 };
 
