@@ -1,5 +1,5 @@
 const { signUpSchema, loginSchema } = require("@schemas/authSchemas");
-const { AppError } = require("./error");
+const { AppError } = require("./errorHandler");
 
 const routeValidationSchemas = { "/register": signUpSchema, "/login": loginSchema };
 

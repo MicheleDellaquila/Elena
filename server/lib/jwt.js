@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { AppError } = require("@middlewares/error");
+const { AppError } = require("@middleware/errorHandler");
 
 const generateToken = (data, secret, expiresIn) => jwt.sign(data, secret, { expiresIn });
 const decodeToken = (token, secret) => {

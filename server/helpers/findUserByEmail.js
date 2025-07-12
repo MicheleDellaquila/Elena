@@ -1,5 +1,5 @@
 const usersModel = require("@models/users");
-const { AppError } = require("@middlewares/error");
+const { AppError } = require("@middleware/errorHandler");
 
 const findUserByEmail = async (email) => {
   try {

@@ -1,5 +1,5 @@
 const usersModel = require("@models/users");
-const { AppError } = require("@middlewares/error");
+const { AppError } = require("@middleware/errorHandler");
 const { removePassword } = require("@lib/password")
 
 const findUserById = async (userId) => {

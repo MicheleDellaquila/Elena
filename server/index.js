@@ -4,15 +4,15 @@ const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const connectToMongoDB = require("@configs/mongodb");
-const { errorHandler } = require("@middlewares/error");
+const { errorHandler } = require("@middleware/errorHandler");
 const routes = require("@routes/routes");
 
 const loadEnvironmentVariables = () => {
-  const result = dotenv.config({ path: '.env.local', override: true });
+  const result = dotenv.config({ path: ".env.local", override: true });
   if (result.error) throw result.error;
 };
 
-const configureMiddlewares = (app) => {
+const configureMiddleware = (app) => {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -21,7 +21,7 @@ const configureMiddlewares = (app) => {
 
 const createExpressApp = () => {
   const app = express();
-  configureMiddlewares(app);
+  configureMiddleware(app);
 
   // This will register all the routes defined in the routes directory
   app.use("/api/v1", routes);

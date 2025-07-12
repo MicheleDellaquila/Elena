@@ -24,7 +24,7 @@
   "_moduleAliases": {
     "@routes": "./routes",
     "@models": "./models",
-    "@middlewares": "./middlewares",
+    "@middleware": "./middleware",
     "@controllers": "./controllers",
     "@configs": "./configs",
     "@schemas": "./schemas",

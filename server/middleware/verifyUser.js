@@ -1,4 +1,4 @@
-const { AppError } = require("@middlewares/error");
+const { AppError } = require("@middleware/errorHandler");
 const { decodeToken } = require("@lib/jwt");
 
 const verifyUser = (req, res, next) => {
@@ -9,7 +9,7 @@ const verifyUser = (req, res, next) => {
     decodeToken(accessToken, process.env.ACCESS_TOKEN);
     next();
   } catch (error) {
-    if(error.name === "TokenExpiredError") return res.status(401).json({ error: "Token di accesso richiesto." });
+    if (error.name === "TokenExpiredError") return res.status(401).json({ error: "Token di accesso richiesto." });
     next(error);
   }
 };

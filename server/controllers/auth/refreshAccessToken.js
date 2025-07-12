@@ -1,4 +1,4 @@
-const { AppError } = require("@middlewares/error");
+const { AppError } = require("@middleware/errorHandler");
 const { generateToken, decodeToken } = require("@lib/jwt");
 const { COOKIE_OPTIONS, COOKIE_MAX_AGE_ACCESS, ACCESS_TOKEN_EXPIRY } = require("@constants/authConstants");
 

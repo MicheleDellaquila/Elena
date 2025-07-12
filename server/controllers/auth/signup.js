@@ -2,7 +2,7 @@ const usersModel = require("@models/users");
 const findUserByEmail = require("@helpers/findUserByEmail");
 const { hashPassword } = require("@lib/password");
 const setAuthCookies = require("@helpers/setAuthCookies");
-const { AppError } = require("@middlewares/error");
+const { AppError } = require("@middleware/errorHandler");
 
 const isEmailTaken = async (email) => Boolean(await findUserByEmail(email));
 

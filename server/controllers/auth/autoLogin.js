@@ -1,4 +1,4 @@
-const { AppError } = require("@middlewares/error");
+const { AppError } = require("@middleware/errorHandler");
 const { decodeToken } = require("@lib/jwt");
 const findUserById = require("@helpers/findUserById");
 
