@@ -10,4 +10,5 @@ const coursesSchema = new Schema({
   teacher: { type: Types.ObjectId, ref: "Users", required: true },
 });
 
+coursesSchema.index({ createdAt: 1 });
 module.exports = model("Courses", coursesSchema, "courses");
