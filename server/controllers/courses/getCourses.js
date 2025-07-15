@@ -11,7 +11,7 @@ const getCourses = async (req, res, next) => {
     const coursesWithTeacher = await coursesModel.aggregate([
       {
         $facet: {
-          data: [
+          courses: [
             { $lookup: { from: "users", localField: "teacher", foreignField: "_id", as: "teacherInfo" } },
             { $unwind: { path: "$teacherInfo", preserveNullAndEmptyArrays: true } },
             { $lookup: { from: "enrollments", localField: "_id", foreignField: "courseId", as: "enrollments" } },
@@ -20,15 +20,14 @@ const getCourses = async (req, res, next) => {
             { $skip: offset },
             { $limit: parseInt(limit) },
           ],
-          totalCount: [{ $count: "count" }],
         },
       },
     ]);
 
-    if (!coursesWithTeacher || coursesWithTeacher.length === 0) throw new AppError("Nessun corso trovato", 404);
+    if (!coursesWithTeacher || coursesWithTeacher[0].length === 0) throw new AppError("Nessun corso trovato", 404);
 
     const pagination = await getPaginationParams(page, limit);
-    return res.status(200).json({ message: "Corsi recuperati con successo", courses: coursesWithTeacher, pagination });
+    return res.status(200).json({ message: "Corsi recuperati con successo", ...coursesWithTeacher[0], pagination });
   } catch (error) {
     next(error);
   }

@@ -16,7 +16,7 @@ const dataValidation = async (req, _, next) => {
   if (!routeConfig) throw new AppError(`Nessun percorso trovato per la rotta ${path}`, 404);
 
   try {
-    const dataToValidate = { ...req.body, ...req.params };
+    const dataToValidate = { ...req.body, ...req.params, ...req.query };
     const isValidate = await routeConfig.schema.validateAsync(dataToValidate);
     if (!isValidate || typeof isValidate !== "object") throw new AppError("Validation failed", 400);
     else next();
