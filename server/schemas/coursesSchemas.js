@@ -8,4 +8,12 @@ const enrollCourseSchema = Joi.object({
   userId: Joi.string().pattern(regexObjectId, "ID utente non valido").required(),
 });
 
-module.exports = { enrollCourseSchema };
+const searchCoursesSchema = Joi.object({
+  page: Joi.number().integer().min(1).required(),
+  limit: Joi.number().integer().min(1).default(12).required(),
+  title: Joi.string().optional(),
+  category: Joi.string().optional(),
+  teacher: Joi.string().pattern(regexObjectId, "ID utente non valido").optional(),
+});
+
+module.exports = { enrollCourseSchema, searchCoursesSchema };
