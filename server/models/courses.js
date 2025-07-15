@@ -10,5 +10,8 @@ const coursesSchema = new Schema({
   teacher: { type: Types.ObjectId, ref: "Users", required: true },
 });
 
+// Indexes for performance optimization
 coursesSchema.index({ createdAt: 1 });
+coursesSchema.index({ teacher: 1 });
+
 module.exports = model("Courses", coursesSchema, "courses");

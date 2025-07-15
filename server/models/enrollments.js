@@ -10,4 +10,7 @@ const enrollmentsSchema = new Schema({
   courseId: { type: Types.ObjectId, ref: "Courses", required: true },
 });
 
+// Indexes for performance optimization
+enrollmentsSchema.index({ courseId: 1 });
+
 module.exports = model("Enrollments", enrollmentsSchema, "enrollments");
