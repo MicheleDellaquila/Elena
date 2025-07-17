@@ -3,6 +3,14 @@ const Joi = require("joi");
 /* regex patterns for validation */
 const regexObjectId = /^[0-9a-fA-F]{24}$/;
 
+const createCourseSchema = Joi.object({
+  title: Joi.string().min(3).max(100).required(),
+  description: Joi.string().min(10).max(1000).required(),
+  files: Joi.object().optional(),
+  category: Joi.string().required(),
+  teacher: Joi.string().pattern(regexObjectId, "ID utente non valido").required(),
+})
+
 const enrollCourseSchema = Joi.object({
   courseId: Joi.string().pattern(regexObjectId, "ID Corso non valido").required(),
   userId: Joi.string().pattern(regexObjectId, "ID utente non valido").required(),
@@ -16,4 +24,4 @@ const searchCoursesSchema = Joi.object({
   teacher: Joi.string().pattern(regexObjectId, "ID utente non valido").optional(),
 });
 
-module.exports = { enrollCourseSchema, searchCoursesSchema };
+module.exports = { createCourseSchema, enrollCourseSchema, searchCoursesSchema };
