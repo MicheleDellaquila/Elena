@@ -9,7 +9,7 @@ const enrollCourse = async (req, res, next) => {
     const enrollment = new enrollmentsModel(enrollData);
     if (!(await enrollment.save())) throw new AppError("Non è stato possibile salvare l'iscrizione", 500);
 
-    res.status(201).json({ message: "Iscrizione al corso effettuata con successo" });
+    res.status(201).json({ enrollCourse: enrollment });
   } catch (error) {
     next(error);
   }

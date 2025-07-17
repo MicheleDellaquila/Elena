@@ -14,7 +14,7 @@ const login = async (req, res, next) => {
     if (!isPasswordValid) throw new AppError("La password inserita non è corretta.", 401);
 
     setAuthCookies(res, user._id);
-    res.status(200).json({ message: "Login avvenuta con successo", user: removePassword(user._doc) });
+    res.status(200).json({ user: removePassword(user._doc) });
   } catch (error) {
     next(error);
   }

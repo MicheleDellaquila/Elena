@@ -21,13 +21,13 @@ const signUp = async (req, res, next) => {
     if (emailExists) throw new AppError("L'indirizzo email è già in uso.", 409);
 
     const hashedPassword = await hashPassword(password);
-    if (!hashedPassword) throw new AppError("Abbiamo riscontrato un errore");
+    if (!hashedPassword) throw new AppError("Abbiamo riscontrato un errore", 500);
 
     const newUser = { ...req.body, password: hashedPassword, profileImage: "" };
     const user = await saveUser(newUser);
 
     setAuthCookies(res, user._id);
-    res.status(201).json({ message: "Registrazione avvenuta con successo", user: user });
+    res.status(201).json({ user: user });
   } catch (error) {
     next(error);
   }

@@ -5,7 +5,7 @@ const coursesSchema = new Schema({
   title: { type: String, required: true },
   description: String,
   thumbnail: String,
-  category: { type: String, required: true },
+  category: { type: String, enum: ["Matematica", "Informatica", "Fisica", "Inglese", "Generale"], required: true },
   createdAt: { type: Date, default: Date.now },
   teacher: { type: Types.ObjectId, ref: "Users", required: true },
 });

@@ -21,7 +21,7 @@ const courseDetails = async (req, res, next) => {
     
     if (!courseWithDetails || courseWithDetails.length === 0) throw new AppError("Corso non trovato", 404);
 
-    res.status(200).json({ message: "Dettagli corso ottenuti con successo", course: courseWithDetails });
+    res.status(200).json({ course: courseWithDetails });
   } catch (error) {
     next(error);
   }

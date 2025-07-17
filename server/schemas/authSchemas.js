@@ -7,7 +7,7 @@ const signUpSchema = Joi.object({
   fullName: Joi.string().required(),
   email: Joi.string().email().pattern(regexUnibaEmail, "L'email non è valida").required(),
   password: Joi.string().min(8).required(),
-  role: Joi.string().valid("student", "teacher").default("student"),
+  role: Joi.string().valid("Studente", "Insegnante").default("Studente"),
 });
 
 const loginSchema = Joi.object({

@@ -10,7 +10,7 @@ const autoLogin = async (req, res, next) => {
     const decode = decodeToken(accessToken, process.env.ACCESS_TOKEN);
     const user = await findUserById(decode._id);
 
-    res.status(200).json({ message: "Accesso automatico riuscito.", user: user });
+    res.status(200).json({ user: user });
   } catch (error) {
     next(error);
   }

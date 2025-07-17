@@ -1,12 +1,7 @@
 const usersModel = require("@models/users");
-const { AppError } = require("@middleware/errorHandler");
 
 const findUserByEmail = async (email) => {
-  try {
-    return await usersModel.findOne({ email });
-  } catch (error) {
-    throw new AppError("Nessun utente trovato con questa email.", 404);
-  }
+  return await usersModel.findOne({ email });
 };
 
 module.exports = findUserByEmail;
