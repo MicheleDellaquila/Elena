@@ -8,7 +8,7 @@ const courseThumbnailStorage = diskStorage({
   destination: async function (req, file, cb) {
     const { title } = req.body;
     if (!validateTitle(title)) cb(new Error("Il titolo è obbligatorio"));
-    const destination = `uploads/${title.toLowerCase().trim()}`;
+    const destination = `uploads/${title.toLowerCase().replace(/\s+/g, "_")}`;
     cb(null, await createFolders(destination));
   },
   filename: async function (req, file, cb) {

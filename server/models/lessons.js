@@ -4,7 +4,7 @@ const { Schema, Types, model } = mongoose;
 const lessonsSchema = new Schema({
   title: { type: String, required: true },
   description: String,
-  transcription: String,
+  filename: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   courseId: { type: Types.ObjectId, ref: "Courses", required: true },
 });
