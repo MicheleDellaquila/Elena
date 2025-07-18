@@ -1,8 +1,6 @@
 const { AppError } = require("@middleware/errorHandler");
 const { generateToken, decodeToken } = require("@lib/jwt");
-const { COOKIE_OPTIONS, COOKIE_MAX_AGE_ACCESS, ACCESS_TOKEN_EXPIRY } = require("@constants/authConstants");
-
-const COMPUTED_COOKIE_OPTIONS = { ...COOKIE_OPTIONS, maxAge: COOKIE_MAX_AGE_ACCESS };
+const { COMPUTED_COOKIE_OPTIONS, ACCESS_TOKEN_EXPIRY } = require("@helpers/setAuthCookies");
 
 const generateNewAccessToken = (refreshToken) => {
   const decodedToken = decodeToken(refreshToken, process.env.REFRESH_TOKEN);

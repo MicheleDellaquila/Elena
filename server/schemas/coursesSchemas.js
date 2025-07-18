@@ -1,7 +1,5 @@
 const Joi = require("joi");
-
-/* regex patterns for validation */
-const regexObjectId = /^[0-9a-fA-F]{24}$/;
+const { regexObjectId } = require("@constants/constants.js");
 
 const createCourseSchema = Joi.object({
   title: Joi.string().min(3).max(100).required(),

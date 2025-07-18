@@ -1,6 +1,6 @@
 const { comparePassword, removePassword } = require("@lib/password");
 const findUserByEmail = require("@helpers/findUserByEmail");
-const setAuthCookies = require("@helpers/setAuthCookies");
+const { setAuthCookies } = require("@helpers/setAuthCookies");
 const { AppError } = require("@middleware/errorHandler");
 
 const login = async (req, res, next) => {

@@ -1,6 +1,6 @@
 const { diskStorage } = require("multer");
 const { createFolders } = require("./fileSystem");
-const { MAX_TITLE_LENGTH, MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = require("@constants/files");
+const { MAX_TITLE_LENGTH, MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = require("@constants/uploadConstants");
 
 const validateTitle = (title) => title && typeof title === "string" && title.trim().length < MAX_TITLE_LENGTH;
 
