@@ -1,5 +1,6 @@
 const { signUpSchema, loginSchema } = require("@schemas/authSchemas");
 const { createCourseSchema, enrollCourseSchema, searchCoursesSchema } = require("@schemas/coursesSchemas");
+const { lessonsSchema } = require("@schemas/lessonsSchemas");
 
 const routeValidationConfig = [
   { path: "/register", method: "POST", schema: signUpSchema },
@@ -7,6 +8,7 @@ const routeValidationConfig = [
   { path: "/create/course", method: "POST", schema: createCourseSchema },
   { path: "/:courseId/enroll/:userId", method: "POST", schema: enrollCourseSchema },
   { path: "/search", method: "POST", schema: searchCoursesSchema },
+  { path: "/:courseId", method: "GET", schema: lessonsSchema },
 ];
 
 module.exports = routeValidationConfig;

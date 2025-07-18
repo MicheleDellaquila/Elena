@@ -9,4 +9,6 @@ const lessonsSchema = new Schema({
   courseId: { type: Types.ObjectId, ref: "Courses", required: true },
 });
 
+lessonsSchema.index({ createdAt: -1 });
+
 module.exports = model("Lessons", lessonsSchema, "lessons");

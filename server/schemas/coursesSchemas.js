@@ -12,7 +12,7 @@ const createCourseSchema = Joi.object({
 })
 
 const enrollCourseSchema = Joi.object({
-  courseId: Joi.string().pattern(regexObjectId, "ID Corso non valido").required(),
+  courseId: Joi.string().pattern(regexObjectId, "ID corso non valido").required(),
   userId: Joi.string().pattern(regexObjectId, "ID utente non valido").required(),
 });
 
