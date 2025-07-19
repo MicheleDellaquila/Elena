@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const multer = require("multer");
-const courseThumbnailStorage = require("@lib/courseThumbnailStorage");
+const courseThumbnailStorage = require("@middleware/courseThumbnailStorage");
 
 // Importing necessary controllers and middlewares
 const verifyUser = require("@middleware/verifyUser");
