@@ -11,7 +11,8 @@ const coursesSchema = new Schema({
 });
 
 // Indexes for performance optimization
-coursesSchema.index({ createdAt: 1 });
+coursesSchema.index({ title: 1 });
 coursesSchema.index({ teacher: 1 });
+coursesSchema.index({ createdAt: 1 });
 
 module.exports = model("Courses", coursesSchema, "courses");
