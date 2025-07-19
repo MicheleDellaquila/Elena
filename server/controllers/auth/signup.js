@@ -7,11 +7,10 @@ const { AppError } = require("@middleware/errorHandler");
 const isEmailTaken = async (email) => Boolean(await findUserByEmail(email));
 
 const saveUser = async (userData) => {
-  const user = new usersModel(userData);
-  const userSaved = await user.save();
-  if (!userSaved) throw new AppError("Abbiamo riscontrato un errore");
+  const user = await usersModel.create(userData);
+  if (!user) throw new AppError("Abbiamo riscontrato un errore");
 
-  return { ...userSaved._doc, password: undefined };
+  return { ...user, password: undefined };
 };
 
 const signUp = async (req, res, next) => {
