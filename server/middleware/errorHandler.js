@@ -9,7 +9,7 @@ class AppError extends Error {
 const errorHandler = (err, req, res, next) => {
   const errorResponse = {
     errorCode: err.code || 500,
-    errorMessage: err.message || "An unexpected error occurred",
+    errorMessage: err.message || "Si è verificato un errore imprevisto",
     type: err.constructor.name,
     ...(process.env.NODE_ENV === "development" && {
       details: {
