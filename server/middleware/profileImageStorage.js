@@ -9,17 +9,19 @@ const profileImageStorage = diskStorage({
     const destination = `uploads/profileImages/${userId}`;
     cb(null, await createFolders(destination));
   },
-  filename: async function (_, file, cb) {
+  filename: function (_, file, cb) {
     const { originalname } = file;
     const sanitizedName = originalname.trim().replace(/\s+/g, "_");
     cb(null, sanitizedName);
   },
-  fileFilter: () => {
-    const { mimetype } = file;
-    if (!ALLOWED_FILE_TYPES.includes(mimetype)) cb(new Error("Tipo di file non supportato"));
-    cb(null, true);
-  },
-  limits: { fileSize: MAX_FILE_SIZE },
 });
 
-module.exports = profileImageStorage;
+const profileImageFilter = (req, file, cb) => {
+  const { mimetype } = file;
+  if (!ALLOWED_FILE_TYPES.includes(mimetype)) cb(new Error("Tipo di file non supportato"));
+  cb(null, true);
+};
+
+const limits = { fileSize: MAX_FILE_SIZE };
+
+module.exports = { profileImageStorage, profileImageFilter, limits };

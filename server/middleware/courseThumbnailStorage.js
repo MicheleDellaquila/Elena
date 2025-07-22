@@ -14,12 +14,14 @@ const courseThumbnailStorage = diskStorage({
     const sanitizedName = originalname.trim().replace(/\s+/g, "_");
     cb(null, sanitizedName);
   },
-  fileFilter: () => {
-    const { mimetype } = file;
-    if (!ALLOWED_FILE_TYPES.includes(mimetype)) cb(new Error("Tipo di file non supportato"));
-    cb(null, true);
-  },
-  limits: { fileSize: MAX_FILE_SIZE },
 });
 
-module.exports = courseThumbnailStorage;
+const courseThumbnailFilter = (req, file, cb) => {
+  const { mimetype } = file;
+  if (!ALLOWED_FILE_TYPES.includes(mimetype)) cb(new Error("Tipo di file non supportato"));
+  cb(null, true);
+};
+
+const limits = { fileSize: MAX_FILE_SIZE };
+
+module.exports = { courseThumbnailStorage, courseThumbnailFilter, limits };

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const multer = require("multer");
-const courseThumbnailStorage = require("@middleware/courseThumbnailStorage");
+const { courseThumbnailStorage, courseThumbnailFilter, limits } = require("@middleware/courseThumbnailStorage");
 
 // Importing necessary controllers and middlewares
 const verifyUser = require("@middleware/verifyUser");
@@ -11,7 +11,7 @@ const enrollCourse = require("@controllers/courses/enrollCourse");
 const searchCourses = require("@controllers/courses/searchCourses");
 const courseDetails = require("@controllers/courses/courseDetails");
 
-const upload = multer({ storage: courseThumbnailStorage });
+const upload = multer({ storage: courseThumbnailStorage, fileFilter: courseThumbnailFilter, limits });
 
 const router = Router();
 router.post("/create/course", verifyUser, upload.single("thumbnail"), dataValidation, createCourse);
