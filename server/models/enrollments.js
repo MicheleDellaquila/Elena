@@ -12,5 +12,6 @@ const enrollmentsSchema = new Schema({
 
 // Indexes for performance optimization
 enrollmentsSchema.index({ courseId: 1 });
+enrollmentsSchema.index({ enrolledAt: 1 });
 
 module.exports = model("Enrollments", enrollmentsSchema, "enrollments");
