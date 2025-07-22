@@ -20,7 +20,8 @@ const getCourses = async (req, res, next) => {
 
     if (!enrichedCourses || enrichedCourses.length === 0) throw new AppError("Nessun corso trovato", 404);
 
-    const pagination = await getPaginationParams(page, limit);
+    const total_courses = await coursesModel.countDocuments();
+    const pagination = await getPaginationParams(total_courses, page, limit);
     return res.status(200).json({ courses: enrichedCourses, pagination });
   } catch (error) {
     next(error);

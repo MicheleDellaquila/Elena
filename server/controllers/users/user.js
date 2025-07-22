@@ -1,23 +1,7 @@
 const { AppError } = require("@middleware/errorHandler");
-const { decodeToken } = require("@lib/jwt");
+const recoverUserId = require("@helpers/recoverUserId");
 const { Types: { ObjectId }} = require("mongoose");
 const userModel = require("@models/users");
-
-const recoverUserId = (req) => {
-  const accessToken = req.cookies?.accessToken;
-  if (!accessToken) {
-    console.error("Access token mancante");
-    throw new AppError();
-  }
-
-  const userId = decodeToken(accessToken, process.env.ACCESS_TOKEN)._id;
-  if (!userId || !ObjectId.isValid(userId)) {
-    console.error("ID utente non valido");
-    throw new AppError();
-  }
-
-  return userId;
-}
 
 const user = async (req, res, next) => {
   try {
