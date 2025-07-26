@@ -7,9 +7,9 @@
       "@/*": ["src/*"],
       "@pages/*": ["src/pages/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@types/*": ["src/types/*"],  
       "@helpers/*": ["src/helpers/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"]
     }
   }
 }
