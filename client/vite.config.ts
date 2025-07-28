@@ -13,6 +13,8 @@ export default defineConfig({
       "@helpers": path.resolve(__dirname, "./src/helpers"),
       "@components": path.resolve(__dirname, "./src/components"),
       "@assets": path.resolve(__dirname, "./src/assets"),
+      "@constants": path.resolve(__dirname, "./src/constants"),
+      "@schemas": path.resolve(__dirname, "./src/schemas")
     },
   },
 });

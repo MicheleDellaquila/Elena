@@ -14,7 +14,9 @@
       "@layouts/*": ["src/layouts/*"],
       "@helpers/*": ["src/helpers/*"],
       "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@constants/*": ["src/constants/*"],
+      "@schemas/*": ["src/schemas/*"]
     },
 
     /* Bundler mode */
