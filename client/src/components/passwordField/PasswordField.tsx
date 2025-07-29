@@ -1,13 +1,7 @@
 import type { SignUpFormField } from "@/types/components";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@components/ui/Form";
+import { FormControl, FormField, FormItem, FormLabel } from "@components/ui/Form";
 import { Input } from "@components/ui/Input";
+import { cn } from "@lib/utils";
 import { EyeOff, Eye } from "lucide-react";
 import useShowPassword from "./useShowPassword";
 
@@ -20,26 +14,31 @@ const PasswordField = ({ control }: SignUpFormField) => {
     <FormField
       control={control}
       name='password'
-      render={({ field }) => (
-        <FormItem className='mb-6'>
-          <FormLabel>Password</FormLabel>
-          <div className='relative'>
-            <FormControl className='relative'>
-              <Input placeholder='********' type={inputType} {...field} />
-            </FormControl>
-            <div
-              className='absolute right-3 top-3 cursor-pointer'
-              onClick={toggleShowPassword}
-            >
-              {inputIcon}
+      render={({ field, fieldState: { error } }) => {
+        const hasError = Boolean(error?.message);
+
+        return (
+          <FormItem className='mb-6'>
+            <FormLabel>Password</FormLabel>
+            <div className='relative'>
+              <FormControl className='relative'>
+                <Input
+                  placeholder='********'
+                  type={inputType}
+                  className={cn(hasError && "border-red-500 focus-visible:ring-0")}
+                  {...field}
+                />
+              </FormControl>
+              <div
+                className='absolute right-3 top-3 cursor-pointer'
+                onClick={toggleShowPassword}
+              >
+                {inputIcon}
+              </div>
             </div>
-          </div>
-          <FormDescription className='text-sm'>
-            La password deve contenere almeno 8 caratteri
-          </FormDescription>
-          <FormMessage />
-        </FormItem>
-      )}
+          </FormItem>
+        );
+      }}
     />
   );
 };

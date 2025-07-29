@@ -8,6 +8,7 @@
       "@pages/*": ["src/pages/*"],
       "@layouts/*": ["src/layouts/*"],
       "@helpers/*": ["src/helpers/*"],
+      "@lib/*": ["src/lib/*"],
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@constants/*": ["src/constants/*"],

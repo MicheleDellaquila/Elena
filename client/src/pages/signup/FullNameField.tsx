@@ -1,5 +1,6 @@
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@components/ui/Form";
+import { FormControl, FormField, FormItem, FormLabel } from "@components/ui/Form";
 import { Input } from "@components/ui/Input";
+import { cn } from "@lib/utils";
 import type { SignUpFormField } from "@/types/components";
 
 const FullNameField = ({ control }: SignUpFormField) => {
@@ -7,15 +8,21 @@ const FullNameField = ({ control }: SignUpFormField) => {
     <FormField
       control={control}
       name='fullName'
-      render={({ field }) => (
-        <FormItem className="mb-4">
-          <FormLabel>Nome e Cognome</FormLabel>
-          <FormControl>
-            <Input placeholder='E.g. Mario Rossi' {...field} />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field, fieldState: { error } }) => {
+        const hasError = error?.message;
+        return (
+          <FormItem className='mb-4'>
+            <FormLabel>Nome e Cognome</FormLabel>
+            <FormControl>
+              <Input
+                placeholder='E.g. Mario Rossi'
+                className={cn(hasError && "border-red-500 focus-visible:ring-0")}
+                {...field}
+              />
+            </FormControl>
+          </FormItem>
+        );
+      }}
     />
   );
 };
