@@ -1,7 +1,13 @@
+import { Toaster } from "@components/ui/Sonner";
 import { Outlet } from "react-router-dom";
 
-const Layout = () => {
-  return <Outlet />;
+const RootLayout = () => {
+  return (
+    <>
+      <Outlet />
+      <Toaster position='top-right' richColors closeButton />
+    </>
+  );
 };
 
-export default Layout;
+export default RootLayout;

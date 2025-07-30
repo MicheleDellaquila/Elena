@@ -2,13 +2,12 @@ import type { SignUpFormField } from "@/types/components";
 import { FormControl, FormField, FormItem, FormLabel } from "@components/ui/Form";
 import { Input } from "@components/ui/Input";
 import { cn } from "@lib/utils";
-import { EyeOff, Eye } from "lucide-react";
 import useShowPassword from "./useShowPassword";
+import Icon from "@components/icon/Icon";
 
 const PasswordField = ({ control }: SignUpFormField) => {
   const { showPassword, toggleShowPassword } = useShowPassword();
   const inputType = showPassword ? "text" : "password";
-  const inputIcon = showPassword ? <Eye size={18} /> : <EyeOff size={18} />;
 
   return (
     <FormField
@@ -29,12 +28,11 @@ const PasswordField = ({ control }: SignUpFormField) => {
                   {...field}
                 />
               </FormControl>
-              <div
+              <Icon
+                iconName={showPassword ? "Eye" : "EyeOff"}
                 className='absolute right-3 top-3 cursor-pointer'
                 onClick={toggleShowPassword}
-              >
-                {inputIcon}
-              </div>
+              />
             </div>
           </FormItem>
         );
