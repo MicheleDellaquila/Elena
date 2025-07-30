@@ -13,7 +13,7 @@ const loadEnvironmentVariables = () => {
 };
 
 const configureMiddleware = (app) => {
-  app.use(cors());
+  app.use(cors({ origin: process.env.CORS_ORIGIN_DEV, credentials: true }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
