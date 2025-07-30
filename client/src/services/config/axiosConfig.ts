@@ -1,9 +1,10 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.DEV
-  ? import.meta.env.VITE_API_URL
-  : import.meta.env.VITE_PROD_API_URL;
-  
+const ENV = import.meta.env;
+const baseURL = ENV.DEV
+  ? `${ENV.VITE_API_URL}/api/${ENV.VITE_API_VERSION}`
+  : `${ENV.VITE_PROD_API_URL}/api/${ENV.VITE_API_VERSION}`;
+
 const apiClient = axios.create({
   baseURL,
   withCredentials: true,

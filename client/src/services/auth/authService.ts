@@ -1,6 +1,15 @@
+import type { SignUpSchemaType } from "@schemas/auth/signUpSchema";
 import apiClient from "@services/config/axiosConfig";
+import type { RefreshTokenResponse, SignUpResponse, ErrorResponse } from "./types";
 
 export const refreshToken = async () => {
-  const response = await apiClient.post("/auth/refresh-access-token");
+  const URL = "/auth/refresh-access-token";
+  const response = await apiClient.post<RefreshTokenResponse | ErrorResponse>(URL);
+  return response.data;
+};
+
+export const signUp = async (userData: SignUpSchemaType) => {
+  const URL = "/auth/register";
+  const response = await apiClient.post<SignUpResponse | ErrorResponse>(URL, userData);
   return response.data;
 };

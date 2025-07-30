@@ -4,21 +4,27 @@ import EmailField from "@components/emailField/EmailField";
 import RoleField from "./RoleField";
 import PasswordField from "@components/passwordField/PasswordField";
 import ButtonForm from "@components/buttonForm/ButtonForm";
-import { useForm } from "react-hook-form";
-import type { SignUpFormValues } from "@/types/data";
+import useSignUpForm from "./hook/useSignUpForm";
+import Loader from "@components/ui/Loader";
+import AlertForm from "@components/alertErrorsForm/AlertErrorsForm";
 
 const SignUpForm = () => {
-  const form = useForm<SignUpFormValues>();
+  const { form, FetcherForm, isSubmitting, signUpUser } = useSignUpForm();
+  const { handleSubmit, formState: { errors} } = form;
 
   return (
     <Form {...form}>
-      <form noValidate>
+      <FetcherForm onSubmit={handleSubmit(signUpUser)} noValidate>
+        <AlertForm title='Modulo non valido' errors={errors} />
         <FullNameField control={form.control} />
         <EmailField control={form.control} />
         <RoleField control={form.control} />
         <PasswordField control={form.control} />
-        <ButtonForm>Registrati</ButtonForm>
-      </form>
+        <ButtonForm>
+          {isSubmitting && <Loader primaryColor='#000' size='mini' />}
+          Registrati
+        </ButtonForm>
+      </FetcherForm>
     </Form>
   );
 };

@@ -1,15 +1,30 @@
+import { useFetcher, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import signUpSchema, { type SignUpSchemaType } from "@schemas/auth/signUpSchema";
+import { useEffect } from "react";
 
 const useSignUpForm = () => {
   const form = useForm<SignUpSchemaType>({ resolver: zodResolver(signUpSchema) });
+  const { Form: FetcherForm, submit, state, data } = useFetcher();
+  const navigate = useNavigate();
+  const { reset } = form;
+  const isSubmitting = state === "submitting";
 
-  const signUpUser = (data: SignUpSchemaType) => {
-    console.log("User signed up with data:", data);
-  };
+  useEffect(() => {
+    if (!data) return;
 
-  return { form, signUpUser };
+    if ("user" in data) {
+      reset();
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/dashboard");
+    }
+  }, [state, reset, data, navigate]);
+
+  const signUpUser = (data: SignUpSchemaType) =>
+    submit(data, { method: "post", action: "/" });
+
+  return { form, FetcherForm, isSubmitting, signUpUser };
 };
 
 export default useSignUpForm;
