@@ -5,13 +5,17 @@ import SignIn from "@pages/signin/SignIn";
 
 // @Actions
 import signUpAction from "./actions/signUpAction";
+import signInAction from "./actions/signInAction";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     action: signUpAction,
-    children: [{ index: true, element: <SignUp /> }, { path: "accedi", element: <SignIn /> }],
+    children: [
+      { index: true, element: <SignUp /> },
+      { path: "accedi", element: <SignIn />, action: signInAction },
+    ],
   },
 ]);
 

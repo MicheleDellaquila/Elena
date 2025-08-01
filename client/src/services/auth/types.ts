@@ -4,9 +4,12 @@ export interface RefreshTokenResponse {
   ok: boolean;
 }
 
-
 export interface SignUpResponse {
-    user: User
+  user: User;
+}
+
+export interface SignInResponse {
+  user: User;
 }
 
 export interface ErrorResponse {

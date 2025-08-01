@@ -3,17 +3,24 @@ import { Form } from "@components/ui/Form";
 import EmailField from "@components/emailField/EmailField";
 import PasswordField from "@components/passwordField/PasswordField";
 import ButtonForm from "@components/buttonForm/ButtonForm";
+import Loader from "@components/ui/Loader";
+import AlertForm from "@components/alertErrorsForm/AlertErrorsForm";
 import useSignInForm from "./hook/useSignInForm";
 
 const SignInForm = () => {
-  const { form, FetcherForm } = useSignInForm();
+  const { form, FetcherForm, isSubmitting, signInUser } = useSignInForm();
+  const { handleSubmit, formState: { errors } } = form;
 
   return (
     <Form {...form}>
-      <FetcherForm noValidate>
+      <FetcherForm onSubmit={handleSubmit(signInUser)} noValidate>
+        <AlertForm title='Modulo non valido' errors={errors} />
         <EmailField<SignInSchemaType> control={form.control} />
         <PasswordField<SignInSchemaType> control={form.control} />
-        <ButtonForm>Accedi</ButtonForm>
+        <ButtonForm>
+          {isSubmitting && <Loader primaryColor='#000' size='mini' />}
+          Accedi
+        </ButtonForm>
       </FetcherForm>
     </Form>
   );
