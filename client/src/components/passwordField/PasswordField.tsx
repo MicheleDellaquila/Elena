@@ -1,18 +1,19 @@
-import type { SignUpFormField } from "@/types/components";
+import type { FormFieldProps } from "@/types/components";
+import type { FieldValues, Path } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel } from "@components/ui/Form";
 import { Input } from "@components/ui/Input";
 import { cn } from "@lib/utils";
 import useShowPassword from "./useShowPassword";
 import Icon from "@components/icon/Icon";
 
-const PasswordField = ({ control }: SignUpFormField) => {
+const PasswordField = <T extends FieldValues>({ control }: FormFieldProps<T>) => {
   const { showPassword, toggleShowPassword } = useShowPassword();
   const inputType = showPassword ? "text" : "password";
 
   return (
     <FormField
       control={control}
-      name='password'
+      name={'password' as Path<T>}
       render={({ field, fieldState: { error } }) => {
         const hasError = Boolean(error?.message);
 

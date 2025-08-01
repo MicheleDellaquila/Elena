@@ -1,9 +1,10 @@
+import type { FormFieldProps } from "@/types/components";
+import type { SignUpSchemaType } from "@schemas/auth/signUpSchema";
 import { FormControl, FormField, FormItem, FormLabel } from "@components/ui/Form";
 import { Input } from "@components/ui/Input";
 import { cn } from "@lib/utils";
-import type { SignUpFormField } from "@/types/components";
 
-const FullNameField = ({ control }: SignUpFormField) => {
+const FullNameField = ({ control }: FormFieldProps<SignUpSchemaType>) => {
   return (
     <FormField
       control={control}

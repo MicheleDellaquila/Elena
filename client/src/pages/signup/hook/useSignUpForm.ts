@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { useFetcher, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import signUpSchema, { type SignUpSchemaType } from "@schemas/auth/signUpSchema";
-import { useEffect } from "react";
 
 const useSignUpForm = () => {
   const form = useForm<SignUpSchemaType>({ resolver: zodResolver(signUpSchema) });

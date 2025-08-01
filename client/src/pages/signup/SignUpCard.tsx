@@ -15,7 +15,7 @@ const SignUpCard = () => {
       <CardFooter>
         <div className='w-full text-center text-sm'>
           <span className='text-gray-600'>Hai già un account? </span>
-          <Link to='/login' className='text-blue-600 hover:text-blue-800 font-medium'>
+          <Link to='/accedi' className='text-blue-600 hover:text-blue-800 font-medium'>
             Accedi
           </Link>
         </div>

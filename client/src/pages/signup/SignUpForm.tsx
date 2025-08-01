@@ -1,3 +1,4 @@
+import type { SignUpSchemaType } from "@schemas/auth/signUpSchema";
 import { Form } from "@components/ui/Form";
 import FullNameField from "./FullNameField";
 import EmailField from "@components/emailField/EmailField";
@@ -17,9 +18,9 @@ const SignUpForm = () => {
       <FetcherForm onSubmit={handleSubmit(signUpUser)} noValidate>
         <AlertForm title='Modulo non valido' errors={errors} />
         <FullNameField control={form.control} />
-        <EmailField control={form.control} />
+        <EmailField<SignUpSchemaType> control={form.control} />
         <RoleField control={form.control} />
-        <PasswordField control={form.control} />
+        <PasswordField<SignUpSchemaType> control={form.control} />
         <ButtonForm>
           {isSubmitting && <Loader primaryColor='#000' size='mini' />}
           Registrati

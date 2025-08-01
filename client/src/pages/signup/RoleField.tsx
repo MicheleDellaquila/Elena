@@ -1,9 +1,10 @@
+import type { FormFieldProps } from "@/types/components";
+import type { SignUpSchemaType } from "@schemas/auth/signUpSchema";
 import { FormField } from "@components/ui/Form";
 import RadioInput from "./RoleInput";
-import type { SignUpFormField } from "@/types/components";
-import { cn } from "@/lib/utils";
+import { cn } from "@lib/utils";
 
-const RoleField = ({ control }: SignUpFormField) => {
+const RoleField = ({ control }: FormFieldProps<SignUpSchemaType>) => {
   return (
     <FormField
       control={control}

@@ -16,8 +16,8 @@ export interface ButtonFormProps extends ButtonHTMLAttributes<HTMLButtonElement>
   disabled?: boolean;
 }
 
-export interface SignUpFormField {
-  control: Control<SignUpSchemaType>;
+export interface FormFieldProps<T = SignUpSchemaType> {
+  control: Control<T>;
 }
 
 export interface RoleInputProps {

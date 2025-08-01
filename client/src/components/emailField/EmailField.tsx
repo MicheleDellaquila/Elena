@@ -1,13 +1,14 @@
+import type { FormFieldProps } from "@/types/components";
+import type { FieldValues, Path } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel } from "@components/ui/Form";
 import { Input } from "@components/ui/Input";
 import { cn } from "@lib/utils";
-import type { SignUpFormField } from "@/types/components";
 
-const EmailField = ({ control }: SignUpFormField) => {
+const EmailField = <T extends FieldValues>({ control }: FormFieldProps<T>) => {
   return (
     <FormField
       control={control}
-      name='email'
+      name={'email' as Path<T>}
       render={({ field, fieldState: { error } }) => {
         const hasError = error?.message;
         return (
