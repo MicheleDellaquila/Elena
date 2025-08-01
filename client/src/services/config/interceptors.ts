@@ -17,10 +17,10 @@ apiClient.interceptors.response.use(
       } catch (refreshError) {
         // Redirect to login or handle auth failure
         console.error("Token refresh failed:", refreshError);
-        return Promise.reject(refreshError);
+        throw new Error("Autenticazione fallita, per favore accedi di nuovo.");
       }
     }
 
-    return Promise.reject(error);
+    throw new Error("Autenticazione fallita, per favore accedi di nuovo.");
   }
 );
