@@ -21,7 +21,7 @@ const SignUpForm = () => {
         <EmailField<SignUpSchemaType> control={form.control} />
         <RoleField control={form.control} />
         <PasswordField<SignUpSchemaType> control={form.control} />
-        <ButtonForm>
+        <ButtonForm disabled={isSubmitting}>
           {isSubmitting && <Loader primaryColor='#000' size='mini' />}
           Registrati
         </ButtonForm>

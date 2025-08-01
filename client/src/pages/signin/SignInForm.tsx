@@ -17,7 +17,7 @@ const SignInForm = () => {
         <AlertForm title='Modulo non valido' errors={errors} />
         <EmailField<SignInSchemaType> control={form.control} />
         <PasswordField<SignInSchemaType> control={form.control} />
-        <ButtonForm>
+        <ButtonForm disabled={isSubmitting}>
           {isSubmitting && <Loader primaryColor='#000' size='mini' />}
           Accedi
         </ButtonForm>
