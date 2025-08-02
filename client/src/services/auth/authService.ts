@@ -26,3 +26,9 @@ export const signIn = async (userData: SignInSchemaType) => {
 
   return response.data;
 };
+
+export const autoLogin = async () => {
+  const URL = "auth/auto-login";
+  const response = await apiClient.post<SignInResponse | ErrorResponse>(URL);
+  return response.data;
+};
