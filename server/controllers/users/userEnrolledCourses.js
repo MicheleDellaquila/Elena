@@ -12,16 +12,23 @@ const userEnrolledCourses = async (req, res, next) => {
 
     const userEnrolledCourses = await userModel.aggregate([
       { $match: { _id: new ObjectId(userId) } },
-      { $lookup: { from: "enrollments", localField: "_id", foreignField: "userId", as: "enrollments" } },
-      { $lookup: { from: "courses", localField: "enrollments.courseId", foreignField: "_id", as: "courses" } },
-      { $project: { _id: 0, courses: { $slice: ["$courses", offset, limit] }, totalCourses: { $size: "$courses" } } },
+      { $lookup: { from: "enrollments", localField: "_id", foreignField: "userId", as: "enrollments" }},
+      { $lookup: { from: "courses", localField: "enrollments.courseId", foreignField: "_id", as: "courses" }},
+      { $lookup: { from: "users", localField: "courses.teacher", foreignField: "_id", as: "teacher" }},
+      { $match: { "teacher.role": "Insegnante" }},
+      { $unwind: "$enrollments" },
+      { $unwind: "$courses" },
+      { $unwind: "$teacher" },
+      { $project: { _id: 0, courseId: "$courses._id", status: "$enrollments.status", progress: "$enrollments.progress", enrolledAt: "$enrollments.enrolledAt", title: "$courses.title", category: "$courses.category", teacherName: "$teacher.fullName", teacherEmail: "$teacher.email" }},
       { $sort: { "enrollments.enrolledAt": 1 } },
+      { $skip: offset },
+      { $limit: limit }
     ]);
     if (!userEnrolledCourses || !userEnrolledCourses.length) throw new AppError("Utente non trovato", 404);
 
-    const { courses, totalCourses } = userEnrolledCourses[0];
+    const totalCourses = userEnrolledCourses.length;
     const pagination = await getPaginationParams(totalCourses, page, limit);
-    return res.status(200).json({ data: courses, pagination });
+    return res.status(200).json({ data: userEnrolledCourses, pagination });
   } catch (error) {
     next(error);
   }
