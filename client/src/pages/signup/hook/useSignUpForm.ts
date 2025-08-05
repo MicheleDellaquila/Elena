@@ -17,7 +17,7 @@ const useSignUpForm = () => {
     if ("user" in data) {
       reset();
       localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/dashboard");
+      navigate("/home");
     }
   }, [state, reset, data, navigate]);
 

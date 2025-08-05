@@ -12,17 +12,17 @@ const useAutoLogin = () => {
     setIsLoading(true);
 
     try {
-      const user = await autoLoginApi();
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/dashboard");
-    } catch (error: any) {
+      const response = await autoLoginApi();
+      if("user" in response) localStorage.setItem("user", JSON.stringify(response.user));
+      navigate("/home");
+    } catch (error: unknown) {
       try {
         console.error("Errore durante auto login:", error);
         await refreshToken();
-        navigate("/dashboard");
-      } catch (refreshError: any) {
-        console.error("Errore durante il refresh del token:", refreshError);
-        errorNotification("Sessione non valida", "La tua sessione è scaduta. Effettua nuovamente l'accesso.");
+        navigate("/home");
+      } catch (refreshError: unknown) {
+        localStorage.removeItem("user");
+        errorNotification("Sessione non valida", (refreshError as Error).message);
         navigate("/accedi");
       }
     } finally {
