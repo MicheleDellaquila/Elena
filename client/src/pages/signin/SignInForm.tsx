@@ -2,14 +2,17 @@ import type { SignInSchemaType } from "@schemas/auth/signInSchema";
 import { Form } from "@components/ui/Form";
 import EmailField from "@components/emailField/EmailField";
 import PasswordField from "@components/passwordField/PasswordField";
-import ButtonForm from "@components/buttonForm/ButtonForm";
+import ButtonForm from "@/containers/buttonForm/ButtonForm";
 import Loader from "@components/ui/Loader";
-import AlertForm from "@components/alertErrorsForm/AlertErrorsForm";
+import AlertForm from "@/components/alertErrorsForm/AlertErrorsForm";
 import useSignInForm from "./hook/useSignInForm";
 
 const SignInForm = () => {
   const { form, FetcherForm, isSubmitting, signInUser } = useSignInForm();
-  const { handleSubmit, formState: { errors } } = form;
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
   return (
     <Form {...form}>

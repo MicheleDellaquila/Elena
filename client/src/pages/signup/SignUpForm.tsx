@@ -4,14 +4,17 @@ import FullNameField from "./FullNameField";
 import EmailField from "@components/emailField/EmailField";
 import RoleField from "./RoleField";
 import PasswordField from "@components/passwordField/PasswordField";
-import ButtonForm from "@components/buttonForm/ButtonForm";
+import ButtonForm from "@/containers/buttonForm/ButtonForm";
 import useSignUpForm from "./hook/useSignUpForm";
 import Loader from "@components/ui/Loader";
-import AlertForm from "@components/alertErrorsForm/AlertErrorsForm";
+import AlertForm from "@/components/alertErrorsForm/AlertErrorsForm";
 
 const SignUpForm = () => {
   const { form, FetcherForm, isSubmitting, signUpUser } = useSignUpForm();
-  const { handleSubmit, formState: { errors} } = form;
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
   return (
     <Form {...form}>
