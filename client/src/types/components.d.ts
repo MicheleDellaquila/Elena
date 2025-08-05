@@ -21,7 +21,7 @@ export interface FormFieldProps<T = SignUpSchemaType> {
 }
 
 export interface RoleInputProps {
-  field: ControllerRenderProps<any, string>;
+  field: ControllerRenderProps<unknown, string>;
   isInValid: boolean;
   value: string;
 }
@@ -46,5 +46,9 @@ export interface AlertErrorsProps {
 
 export interface ErrorFormItemProps {
   fieldName: string;
-  message: FieldErrors[string] | Message | undefined;
+  message: Message | undefined;
+}
+
+export interface ButtonLinkProps {
+  className?: string;
 }

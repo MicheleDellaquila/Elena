@@ -14,7 +14,7 @@ const AlertErrorsForm = ({ title, description, errors }: AlertErrorsProps) => {
         {description && <p>{description}</p>}
         <ul className='list-inside list-disc text-sm'>
           {Object.entries(errors).map(([key, error]) => (
-            <ErrorFormItem key={key} fieldName={key} message={error?.message} />
+            <ErrorFormItem key={key} fieldName={key} message={error?.message?.toString()} />
           ))}
         </ul>
       </AlertDescription>
