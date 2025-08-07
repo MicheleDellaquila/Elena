@@ -14,7 +14,7 @@ const userEnrolledCourses = async (req, res, next) => {
       { $lookup: { from: "users", localField: "courseInfo.teacher", foreignField: "_id", as: "teacherInfo" }},
       { $unwind: "$courseInfo" },
       { $unwind: "$teacherInfo" },
-      { $project: { status: 1, progress: 1, enrolledAt: 1, title: "$courseInfo.title", category: "$courseInfo.category", teacherName: "$teacherInfo.fullName", teacherEmail: "$teacherInfo.email" }},
+      { $project: { status: 1, progress: 1, enrolledAt: 1, courseId: "$courseInfo._id", title: "$courseInfo.title", category: "$courseInfo.category", teacherName: "$teacherInfo.fullName", teacherEmail: "$teacherInfo.email" }},
       { $sort: { enrolledAt: 1 }},
     ]);
     
