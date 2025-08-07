@@ -15,7 +15,7 @@ const Icon = ({
   if (!IconComponent) return null;
 
   return (
-    <span className={cn("w-fit", className)} {...props}>
+    <span className={cn("block w-fit cursor-pointer", className)} {...props}>
       <IconComponent size={size} color={color} />
     </span>
   );

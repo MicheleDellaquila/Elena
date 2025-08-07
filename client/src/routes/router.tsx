@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import Layout from "@layouts/RootLayout";
 import SignUp from "@pages/signup/SignUp";
 import SignIn from "@pages/signin/SignIn";
+import Home from "@pages/dashboard/Home";
 
 // @Actions
 import signUpAction from "./actions/signUpAction";
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <SignUp /> },
       { path: "accedi", element: <SignIn />, action: signInAction },
+      { path: "home", element: <Home /> },
     ],
   },
 ]);
