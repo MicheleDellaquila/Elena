@@ -1,7 +1,7 @@
 import { Toaster } from "@components/ui/Sonner";
 import { Outlet } from "react-router-dom";
 import useAutoLogin from "./hook/useAutoLogin";
-import LoadingSessions from "@components/loadingSessions/LoadingSessions";
+import LoadingSessions from "@/containers/loadingSessions/LoadingSessions";
 
 const RootLayout = () => {
   const { isLoading } = useAutoLogin();

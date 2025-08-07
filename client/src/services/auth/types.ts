@@ -11,7 +11,3 @@ export interface SignUpResponse {
 export interface SignInResponse {
   user: User;
 }
-
-export interface ErrorResponse {
-  error: string;
-}
