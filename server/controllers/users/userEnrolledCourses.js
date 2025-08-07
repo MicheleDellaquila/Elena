@@ -1,34 +1,26 @@
 const { AppError } = require("@middleware/errorHandler");
-const userModel = require("@models/users");
+const enrollmentsModel = require("@models/enrollments");
 const { Types: { ObjectId }} = require("mongoose");
 const recoverUserId = require("@helpers/recoverUserId");
-const { validatePaginationParams, calculateOffset, getPaginationParams } = require("@lib/pagination");
 
 const userEnrolledCourses = async (req, res, next) => {
   try {
-    const { page, limit } = validatePaginationParams(req.query.page, req.query.limit);
-    const offset = calculateOffset(page, limit);
     const userId = recoverUserId(req);
 
-    const userEnrolledCourses = await userModel.aggregate([
-      { $match: { _id: new ObjectId(userId) } },
-      { $lookup: { from: "enrollments", localField: "_id", foreignField: "userId", as: "enrollments" }},
-      { $lookup: { from: "courses", localField: "enrollments.courseId", foreignField: "_id", as: "courses" }},
-      { $lookup: { from: "users", localField: "courses.teacher", foreignField: "_id", as: "teacher" }},
-      { $match: { "teacher.role": "Insegnante" }},
-      { $unwind: "$enrollments" },
-      { $unwind: "$courses" },
-      { $unwind: "$teacher" },
-      { $project: { _id: 0, courseId: "$courses._id", status: "$enrollments.status", progress: "$enrollments.progress", enrolledAt: "$enrollments.enrolledAt", title: "$courses.title", category: "$courses.category", teacherName: "$teacher.fullName", teacherEmail: "$teacher.email" }},
-      { $sort: { "enrollments.enrolledAt": 1 } },
-      { $skip: offset },
-      { $limit: limit }
+    const userEnrolledCourses = await enrollmentsModel.aggregate([
+      { $match: { userId: new ObjectId(userId) }},
+      { $lookup: { from: "users", localField: "userId", foreignField: "_id", as: "userInfo" }},
+      { $lookup: { from: "courses", localField: "courseId", foreignField: "_id", as: "courseInfo" }},
+      { $lookup: { from: "users", localField: "courseInfo.teacher", foreignField: "_id", as: "teacherInfo" }},
+      { $unwind: "$courseInfo" },
+      { $unwind: "$teacherInfo" },
+      { $project: { status: 1, progress: 1, enrolledAt: 1, title: "$courseInfo.title", category: "$courseInfo.category", teacherName: "$teacherInfo.fullName", teacherEmail: "$teacherInfo.email" }},
+      { $sort: { enrolledAt: 1 }},
     ]);
-    if (!userEnrolledCourses || !userEnrolledCourses.length) throw new AppError("Utente non trovato", 404);
+    
+    if (!userEnrolledCourses || !userEnrolledCourses.length) throw new AppError("Nessun corso trovato", 404);
 
-    const totalCourses = userEnrolledCourses.length;
-    const pagination = await getPaginationParams(totalCourses, page, limit);
-    return res.status(200).json({ data: userEnrolledCourses, pagination });
+    return res.status(200).json({ data: userEnrolledCourses });
   } catch (error) {
     next(error);
   }
