@@ -15,6 +15,7 @@ export const coursesTableColumns: ColumnDef<EnrolledCourse>[] = [
         <span className={`px-2 py-1 rounded ${getStatusClass(status)}`}>{status}</span>
       );
     },
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "title",
@@ -24,6 +25,7 @@ export const coursesTableColumns: ColumnDef<EnrolledCourse>[] = [
     accessorKey: "progress",
     header: "Progresso",
     cell: ({ row }) => `${row.original.progress}%`,
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "teacherName",
@@ -32,19 +34,25 @@ export const coursesTableColumns: ColumnDef<EnrolledCourse>[] = [
   {
     accessorKey: "teacherEmail",
     header: "Email docente",
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "category",
     header: "Categoria",
     cell: ({ row }) => {
       const category = row.original.category;
-      return <span className={`px-2 py-1 rounded ${getCategoryClass(category)}`}>{category}</span>
+      return (
+        <span className={`px-2 py-1 rounded ${getCategoryClass(category)}`}>
+          {category}
+        </span>
+      );
     },
   },
   {
     accessorKey: "enrolledAt",
     header: "Data di iscrizione",
     cell: ({ row }) => new Date(row.original.enrolledAt).toLocaleDateString(),
+    enableGlobalFilter: false,
   },
   {
     id: "actions",
@@ -60,5 +68,6 @@ export const coursesTableColumns: ColumnDef<EnrolledCourse>[] = [
         </Link>
       );
     },
+    enableGlobalFilter: false,
   },
 ];

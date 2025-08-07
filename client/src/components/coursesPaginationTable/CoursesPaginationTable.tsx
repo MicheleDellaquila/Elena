@@ -1,7 +1,11 @@
+import { useState } from "react";
+
 import {
   type ColumnDef,
+  type ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -16,6 +20,7 @@ import {
 } from "@components/ui/Table";
 
 import Button from "@components/ui/Button";
+import { Input } from "@components/ui/Input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -26,15 +31,26 @@ const CoursesPaginationTable = <TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) => {
+  const [globalFilter, setGlobalFilter] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    state: { globalFilter },
   });
 
   return (
     <div>
+      <div className='flex items-center mb-4'>
+        <Input
+          placeholder='Cerca il nome del corso, nome del docente o categoria del corso...'
+          onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+          value={(table.getState().globalFilter as string) ?? ""}
+        />
+      </div>
       <div className='overflow-hidden rounded-md border'>
         <Table>
           <TableHeader>

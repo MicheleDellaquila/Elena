@@ -14,7 +14,7 @@ const OwnCourses = () => {
 
   return (
     <section>
-      <header className='flex flex-wrap gap-2 sm:gap-0 sm:flex-none sm:items-center justify-between mb-4'>
+      <header className='flex flex-wrap gap-2 sm:gap-0 sm:flex-none sm:items-center justify-between mb-2'>
         <h2 className='text-2xl font-bold'>I tuoi corsi</h2>
         <ButtonLink className='w-fit border sm:w-auto' onClick={() => navigate("/corsi")}>
           <Icon iconName='BookOpen' /> Esplora altri corsi
